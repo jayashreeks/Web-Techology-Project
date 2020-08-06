@@ -1,0 +1,78 @@
+<html>  
+<head>
+    <title>Display</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+      #examiners {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      #examiners td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+      
+      #examiners tr:nth-child(even){background-color: #f2f2f2;}
+      
+      #examiners tr:hover {background-color: #ddd;}
+      
+      #examiners th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: black;
+        color: white;
+      }
+    </style>
+</head>
+<body> 
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Examiner Details</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="insert.html">Insert</a></li>
+      <li><a href="update.html">Update</a></li>
+      <li><a href="delete.html">Delete</a></li>
+      <li class="active"><a href="/display">Display</a></li>
+    </ul>
+    <form class="navbar-form navbar-left" action="/search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search" name="search">
+      </div>
+      <button type="submit" class="btn btn-default">Search By ID</button>
+    </form>
+  </div>
+</nav>
+<div class="container"></div>
+<h3>List of Examiners</h3>
+<table id="examiners">
+  <tr>
+      <th>ID:</th>
+      <th>Name:</th>
+      <th>Qualification:</th>
+      <th>Birth of Date: </th>
+      <th>Name of the Institution:</th>
+  </tr>
+  <% for(var i=0; i<examiners.length; i++) {%>
+    <% if(examiners[i].eid) {%>
+      <tr>
+      <td><span><%=examiners[i].eid%></span></td>
+      <td><span><%= examiners[i].ename%></span></td>
+      <td><span><%= examiners[i].equal%></span></td>
+      <td><span><%=examiners[i].eage%></span></td>
+      <td><span><%=examiners[i].eins%></span></td><br>
+      </tr>
+  <%} } %>
+</table>
+</div>
+</body>
+</html>

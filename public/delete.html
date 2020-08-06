@@ -1,0 +1,79 @@
+<html>  
+<head>
+    <title>Delete</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="angular/angular.min.js"> </script>
+    <style>
+    .content-section{
+        margin:50px;
+        padding-left:350px;
+        
+    }
+  </style>
+</head>
+<script> var myModule = angular.module("myApp",[])  </script> 
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Examiner Details</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="insert.html">Insert</a></li>
+      <li><a href="update.html">Update</a></li>
+      <li class="active"><a href="delete.html">Delete</a></li>
+      <li><a href="/display">Display</a></li>
+    </ul>
+    <form class="navbar-form navbar-left" action="/search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search" name="search">
+      </div>
+      <button type="submit" class="btn btn-default">Search By ID</button>
+    </form>
+  </div>
+</nav>
+<h3> Delete Examiner </h3> 
+<div class="content-section">
+  <body ng-app="myApp">
+  <form ng-controller="appController" ng-submit="send()">  
+  <label for="eid">Examiner ID: </label><input type="text" id="eid" ng-model="data.eid"><br><br>  
+  <input type="submit" ng-click="Submit">  
+  <div>{{ response.data }}</div>
+  </form>  
+</div>
+<script>
+	 myModule.controller ("appController",
+        function appController($scope, $http) {
+            /*$http directive is used to communicate to the server */
+            $scope.data = {}
+            $scope.response = {}
+			
+            $scope.send = function () {
+                /*executed when submit is clicked*/          
+				console.log($scope.data.ename);
+                var posting = $http({
+			/*posting to /process_get  */
+                    //method: 'GET',
+                    //url: '/process_get',
+                    //params: $scope.data,
+			/*posting to /process_post*/
+                    method: 'POST',
+                    url: '/delete_1',
+                    data: $scope.data,
+                    
+                }).then (function (response) {
+                    /*executed when server responds back*/
+                    console.log(response);
+                    $scope.response.data = response.data;
+                },function (error){
+					console.log(error);
+			});
+            }
+        });
+    </script>
+</body>  
+</html>  
